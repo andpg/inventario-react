@@ -13,11 +13,7 @@ function Inventario() {
   const fetchArticulos = () => {
     fetch('http://localhost:5000/articles')
     .then((res) => res.json())
-    .then((data) => {
-      if (data) {
-        setArticulos(data);
-      }
-    });
+    .then((data) => setArticulos(data));
   }
 
   useEffect(fetchArticulos, []);
@@ -30,7 +26,7 @@ function Inventario() {
           <button onClick={fetchArticulos}>Recargar</button>
           {articulos.length ? (
             <select onChange={(e) => setFiltro(e.target.value)}>
-              <option value='' />
+              <option value=''>Filtrar categorías</option>
               {[...new Set(
                 articulos.map((articulo) => articulo['categoría'])
               )].map((categoria) => (
@@ -48,7 +44,7 @@ function Inventario() {
       <section>
         <article>
           <div>Nombre</div>
-          <div>Tipo</div>
+          <div>Categoría</div>
           <div>Cantidad</div>
         </article>
           {verAgregar ?

@@ -1,9 +1,9 @@
 export default function EditorArticulo(props) {
   const handleSubmit = (event) => {
     fetch(props.articulo ? 
-        `http://localhost:5000/articles/${props.articulo['_id']}`
+        `http://localhost:5000/articulos/${props.articulo['_id']}`
       :
-        'http://localhost:5000/articles'
+        'http://localhost:5000/articulos'
       , {
       method: 'POST',
       body: new FormData(event.target)
