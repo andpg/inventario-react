@@ -1,9 +1,9 @@
 export default function EditorArticulo(props) {
   const handleSubmit = (event) => {
     fetch(props.articulo ? 
-        `http://localhost:5000/articulos/${props.articulo['_id']}`
+        `https://inventario-react-api.herokuapp.com/articulos/${props.articulo['_id']}`
       :
-        'http://localhost:5000/articulos'
+        'https://inventario-react-api.herokuapp.com/articulos'
       , {
       method: 'POST',
       body: new FormData(event.target)

@@ -9,12 +9,12 @@ function Pedidos() {
   let [filtro, setFiltro] = useState('');
 
   const fetchPedidos = () => {
-    fetch('http://localhost:5000/pedidos')
+    fetch('https://inventario-react-api.herokuapp.com/pedidos')
     .then((res) => res.json())
     .then((data) => {
       setPedidos(data);
       pedidos.forEach((pedido) => {
-        fetch(`http://localhost:5000/articulos/${pedido['id_articulo']}`)
+        fetch(`https://inventario-react-api.herokuapp.com/articulos/${pedido['id_articulo']}`)
         .then((res) => res.json())
         .then((data) => setArticulos([...articulos, data]));
       });

@@ -11,7 +11,7 @@ function Inventario() {
   let [verAgregar, setVerAgregar] = useState('');
 
   const fetchArticulos = () => {
-    fetch('http://localhost:5000/articles')
+    fetch('https://inventario-react-api.herokuapp.com/articulos')
     .then((res) => res.json())
     .then((data) => setArticulos(data));
   }

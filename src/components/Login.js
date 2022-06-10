@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function Login(props) {
   const handleSubmit = (event) => {
-    fetch('http://localhost:5000/login', {
+    fetch('https://inventario-react-api.herokuapp.com/login', {
       method: 'POST',
       body: new FormData(event.target)
     })

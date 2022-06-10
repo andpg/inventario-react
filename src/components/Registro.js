@@ -4,8 +4,8 @@ function Registro(props) {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    if (event.target["contraseña"] === event.target["confirmaContraseña"]) {
-      fetch("http://localhost:5000/register", {
+    if (event.target["contraseña"].value === event.target["confirmaContraseña"].value) {
+      fetch("https://inventario-react-api.herokuapp.com/register", {
         method: "POST",
         body: new FormData(event.target),
       })
@@ -18,8 +18,10 @@ function Registro(props) {
           alert(data['error']);
         }
       });
-      event.preventDefault();
+    } else {
+      alert('Contraseña no confirmada.');
     }
+    event.preventDefault();
   };
 
   return (
