@@ -4,7 +4,6 @@ import {
   Route,
 } from 'react-router-dom';
 import {
-  createContext,
   useState
 } from 'react';
 
@@ -13,19 +12,15 @@ import Pedidos from './components/Pedidos';
 import Inventario from './components/Inventario';
 import Registro from './components/Registro';
 
-export const SessionContext = createContext();
-
 function App() {
-  const [user, setUser] = useState();
+  const [usuario, setUsuario] = useState();
   return (
     <BrowserRouter>
-      <SessionContext.Provider value={[user, setUser]}>
-        <Routes>
-          <Route path='/' element={user ? <Inventario /> : <Login />} />
-          <Route path='registro' element={<Registro />} />
-          <Route path='ordenes' element={<Pedidos />} />
-        </Routes>
-      </SessionContext.Provider>
+      <Routes>
+        <Route path="/" element={usuario ? <Inventario /> : <Login setUsuario={setUsuario} />} />
+        <Route path="registro" element={<Registro setUsuario={setUsuario} />} />
+        <Route path="ordenes" element={<Pedidos />} />
+      </Routes>
     </BrowserRouter>
   );
 }
