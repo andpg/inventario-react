@@ -2,9 +2,9 @@ import {
   useState,
   useEffect
 } from 'react';
+import { Link } from 'react-router-dom';
 
 function Pedidos() {
-  let [articulos, setArticulos] = useState([]);
   let [pedidos, setPedidos] = useState([]);
   let [filtro, setFiltro] = useState('');
 
@@ -13,10 +13,10 @@ function Pedidos() {
     .then((res) => res.json())
     .then((data) => {
       setPedidos(data);
-      pedidos.forEach((pedido) => {
+      data.forEach((pedido, index) => {
         fetch(`https://inventario-react-api.herokuapp.com/articulos/${pedido['id_articulo']}`)
         .then((res) => res.json())
-        .then((data) => setArticulos([...articulos, data]));
+        .then((data) => setPedidos());
       });
     });
   }
@@ -27,13 +27,14 @@ function Pedidos() {
     <div>
       <header>
         <h2>Inventario</h2>
+        <Link to='/pedidos'>Ver pedidos</Link>
         <nav>
-          <button onClick={fetchPedidos}>Recargar</button>
-          {articulos.length ? (
+          <button onClick={fetchPedidos}>Refrescar</button>
+          {pedidos.length ? (
             <select onChange={(e) => setFiltro(e.target.value)}>
               <option value='' />
               {[...new Set(
-                articulos.map((articulo) => articulo['categoría'])
+                pedidos.map((pedido) => pedido['artículo'] ? pedido['artículo']['categoría'] : '')
               )].map((categoria) => (
                 <option key={categoria} value={categoria}>
                   {categoria}
@@ -53,11 +54,11 @@ function Pedidos() {
         </article>
           {pedidos.length ?
             (filtro.length
-              ? pedidos.filter((_, index) => articulos[index]['categoría'] === filtro)
+              ? pedidos.filter((pedido) => pedido['artículo']['categoría'] === filtro)
               : pedidos
-            ).map((pedido, index) => (
-              <article>
-                <div>{articulos[index]["nombre"]}</div>
+            ).map((pedido) => (
+              <article key={pedido['_id']}>
+                <div>{pedido['artículo'] ? pedido['artículo']["nombre"] : '...'}</div>
                 <div>{pedido["cantidad"]}</div>
                 <div>{pedido["proveedor"]}</div>
                 <div>Entregado</div>
