@@ -3,10 +3,10 @@ import {
   useEffect
 } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/Tabla.css';
 
 function Pedidos() {
   let [pedidos, setPedidos] = useState([]);
-  let [filtro, setFiltro] = useState('');
 
   const fetchPedidos = () => {
     fetch('https://inventario-react-api.herokuapp.com/pedidos')
@@ -19,26 +19,14 @@ function Pedidos() {
   return (
     <div>
       <header>
-        <h2>Inventario</h2>
-        <Link to='/pedidos'>Ver pedidos</Link>
+        <h2>Pedidos</h2>
+        <Link to='/'>Ver inventario</Link>
         <nav>
           <button onClick={fetchPedidos}>Refrescar</button>
-          {pedidos.length ? (
-            <select onChange={(e) => setFiltro(e.target.value)}>
-              <option value='' />
-              {[...new Set(
-                pedidos.map((pedido) => pedido['artículo'] ? pedido['artículo']['categoría'] : '')
-              )].map((categoria) => (
-                <option key={categoria} value={categoria}>
-                  {categoria}
-                </option>
-              ))}
-            </select>
-          ) : ''}
         </nav>
       </header>
-      <section>
-        <article>
+      <section className='Tabla'>
+        <article className='Titulos'>
           <div>Artículo</div>
           <div>Cantidad pedida</div>
           <div>Proveedor</div>
@@ -46,12 +34,9 @@ function Pedidos() {
           <div>Cantidad entregada</div>
         </article>
           {pedidos.length ?
-            (filtro.length
-              ? pedidos.filter((pedido) => pedido['artículo']['categoría'] === filtro)
-              : pedidos
-            ).map((pedido) => (
+            pedidos.map((pedido) => (
               <article key={pedido['_id']}>
-                <div>{pedido["nombre"]}</div>
+                <div>{pedido["articulo"]}</div>
                 <div>{pedido["cantidad"]}</div>
                 <div>{pedido["proveedor"]}</div>
                 <div>Entregado</div>
