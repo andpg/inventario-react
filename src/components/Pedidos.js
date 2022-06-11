@@ -11,14 +11,7 @@ function Pedidos() {
   const fetchPedidos = () => {
     fetch('https://inventario-react-api.herokuapp.com/pedidos')
     .then((res) => res.json())
-    .then((data) => {
-      setPedidos(data);
-      data.forEach((pedido, index) => {
-        fetch(`https://inventario-react-api.herokuapp.com/articulos/${pedido['id_articulo']}`)
-        .then((res) => res.json())
-        .then((data) => setPedidos());
-      });
-    });
+    .then((data) => setPedidos(data));
   }
 
   useEffect(fetchPedidos, []);
@@ -58,7 +51,7 @@ function Pedidos() {
               : pedidos
             ).map((pedido) => (
               <article key={pedido['_id']}>
-                <div>{pedido['artículo'] ? pedido['artículo']["nombre"] : '...'}</div>
+                <div>{pedido["nombre"]}</div>
                 <div>{pedido["cantidad"]}</div>
                 <div>{pedido["proveedor"]}</div>
                 <div>Entregado</div>
