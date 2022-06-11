@@ -5,6 +5,7 @@ import {
 import { Link } from 'react-router-dom';
 import Articulo from './Articulo';
 import EditorArticulo from './EditorArticulo';
+import '../styles/Tabla.css';
 
 function Inventario() {
   let [articulos, setArticulos] = useState([]);
@@ -43,8 +44,8 @@ function Inventario() {
           </button>
         </nav>
       </header>
-      <section>
-        <article>
+      <section className='Tabla'>
+        <article className='Titulos'>
           <div>Nombre</div>
           <div>Categoría</div>
           <div>Cantidad</div>
