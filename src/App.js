@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={usuario ? <Inventario /> : <Login setUsuario={setUsuario} />} />
         <Route path="registro" element={<Registro setUsuario={setUsuario} />} />
-        <Route path="ordenes" element={<Pedidos />} />
+        <Route path="pedidos" element={<Pedidos />} />
       </Routes>
     </BrowserRouter>
   );

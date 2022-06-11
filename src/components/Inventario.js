@@ -2,6 +2,7 @@ import {
   useState,
   useEffect
 } from 'react';
+import { Link } from 'react-router-dom';
 import Articulo from './Articulo';
 import EditorArticulo from './EditorArticulo';
 
@@ -22,8 +23,9 @@ function Inventario() {
     <div>
       <header>
         <h2>Inventario</h2>
+        <Link to='/pedidos'>Ver pedidos</Link>
         <nav>
-          <button onClick={fetchArticulos}>Recargar</button>
+          <button onClick={fetchArticulos}>Refrescar</button>
           {articulos.length ? (
             <select onChange={(e) => setFiltro(e.target.value)}>
               <option value=''>Filtrar categorías</option>
